@@ -1,0 +1,50 @@
+# AgentTrace Policy Configuration
+# The session-aware policy that the existing ecosystem doesn't provide.
+#
+# What this policy says:
+# - Max $2.00 per session (low for demo purposes)
+# - Max $0.50 per action
+# - Alert at 80% budget utilization
+# - Kill session if budget exceeded
+# - Kill session after 3 PII blocks
+# - Kill session after 1 scope violation
+# - Send Slack webhook on kill
+
+version: "1.0"
+agent_id: "customer-support-bot"
+
+session:
+  max_duration: 30m
+  max_actions: 50
+
+budget:
+  max_cost_per_session: 2.00
+  max_cost_per_action: 0.50
+  alert_at: 0.80
+  on_exceed: kill
+
+violations:
+  pii_scanner: langchain  # delegate PII detection to LangChain PIIMiddleware
+  
+  thresholds:
+    pii_blocked: 3        # 3 PII blocks → kill
+    scope_violation: 1    # 1 scope violation → kill
+    rate_limit_hit: 5     # 5 rate limit hits → kill
+  
+  on_threshold: kill
+
+kill_switch:
+  enabled: true
+  notify:
+    - webhook: "https://hooks.slack.com/services/YOUR/WEBHOOK/URL"
+  grace_period: 5s
+
+audit:
+  enabled: true
+  include:
+    - action_name
+    - policy_decision
+    - cost_incurred
+    - session_state
+  export:
+    - file: "/tmp/agenttrace/audit.jsonl"

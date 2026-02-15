@@ -32,7 +32,7 @@ from typing import Any
 from uuid import UUID
 
 from agenttrace.engine.agent_trace import AgentTrace
-from agenttrace.engine.policy_engine import PolicyAction
+
 from agenttrace.engine.session import SessionKilledError
 
 logger = logging.getLogger("agenttrace.langchain")

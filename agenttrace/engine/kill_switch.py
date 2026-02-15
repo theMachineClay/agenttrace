@@ -12,7 +12,7 @@ This is the circuit breaker pattern applied to AI agents.
 from __future__ import annotations
 
 import asyncio
-import json
+
 import logging
 import time
 from dataclasses import dataclass
@@ -20,7 +20,7 @@ from typing import Any, Callable
 
 import httpx
 
-from agenttrace.engine.session import Session, SessionState
+from agenttrace.engine.session import Session
 
 logger = logging.getLogger("agenttrace.kill_switch")
 
@@ -142,7 +142,7 @@ class KillSwitch:
     def execute_sync(self, session: Session, reason: str) -> KillEvent:
         """Synchronous version — creates event loop if needed."""
         try:
-            loop = asyncio.get_running_loop()
+            asyncio.get_running_loop()
             # We're already in an async context, schedule it
             import concurrent.futures
             with concurrent.futures.ThreadPoolExecutor() as pool:

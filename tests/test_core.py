@@ -2,9 +2,9 @@
 
 import pytest
 import time
-from unittest.mock import AsyncMock, patch
 
-from agenttrace.engine.session import Session, SessionManager, SessionState, SessionKilledError
+
+from agenttrace.engine.session import Session, SessionState, SessionKilledError
 from agenttrace.engine.cost_tracker import CostTracker
 from agenttrace.engine.policy_engine import PolicyEngine, PolicyAction
 from agenttrace.engine.agent_trace import AgentTrace

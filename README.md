@@ -4,10 +4,10 @@
 
 *Existing guardrails are stateless. AgentTrace adds state. It's the circuit breaker for LLM agent sessions.*
 
+[![CI](https://github.com/theMachineClay/agenttrace/actions/workflows/ci.yml/badge.svg)](https://github.com/theMachineClay/agenttrace/actions)
 [![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](LICENSE)
 [![Python](https://img.shields.io/badge/python-3.10+-blue.svg)](https://python.org)
 [![Status](https://img.shields.io/badge/status-MVP-green.svg)]()
-[![Tests](https://img.shields.io/badge/tests-21%20passed-brightgreen.svg)]()
 
 ---
 
